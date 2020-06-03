@@ -31,22 +31,25 @@
     function sendMessageToUnity(message) {
       if (isIOS()) {
         appendIframeWithURL('inappbrowserbridge://' + message);
-      } else if (isAndroid()) {
-        UnityInAppBrowser.sendMessageFromJS(message);
-      }
-    }
+          } else if (isAndroid()) {
+            UnityInAppBrowser.sendMessageFromJS(message);
+          }
+        }
 
-    function sendPing() {
-      console.log("ping");
-      sendMessageToUnity("ping");
-    }
+        function sendPing() {
+          console.log("ping");
+          sendMessageToUnity("ping");
+        }
 
-    function signout()
-    {
+        function signout() {
+          firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+          }).catch(function (error) {
+            // An error happened.
+          })
+        }
 
-    }
-
-  </script>
+      </script>
   <style>
     .myButton {
       background-color: #2e466e;
@@ -142,7 +145,7 @@
   <h1>Welcome to My Awesome App</h1>
   <div id="firebaseui-auth-container"></div>
   <a class="myButton" onclick="sendPing()">Click here to send "Ping" to Unity</a>
-  <a class="myButton" onclick="signout()">Click here to send "Ping" to Unity</a>
+  <a class="myButton" onclick="signout()">SignOut</a>
 </body>
 
 </html>
